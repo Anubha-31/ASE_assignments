@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+D:\Windsor\Term1\Advanced Software Engineering\Assignments\Assignment4\solution\.metadata\.plugins\org.eclipse.jdt.core
+2005756727.index
+1642175237.index
+2658275099.index

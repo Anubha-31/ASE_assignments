@@ -1,0 +1,35 @@
+package com.test;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+@RunWith(Parameterized.class)
+public class TestClassDegre {
+
+	
+	TrignometricFunctions functions;
+	int degree;
+	
+	public TestClassDegre(int degree) {
+		this.degree = degree;
+	}
+	
+	@Parameterized.Parameters
+	public static Collection degrees(){
+		
+		Object[][] data = {{90},{180},{60},{0},{2},{120},{360},{180},{-120},{-360}};
+		return Arrays.asList(data);
+	}
+	
+	@Test
+	public void testSine() {	
+		
+		assertEquals(Math.sin(functions.toDegree(degree)) , functions.sin(degree), 0.1);
+	}
+}

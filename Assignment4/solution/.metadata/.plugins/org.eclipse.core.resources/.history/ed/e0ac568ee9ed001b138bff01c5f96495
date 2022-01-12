@@ -1,0 +1,71 @@
+package com.test;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+@RunWith(Parameterized.class)
+public class TestClassRadians {
+	TrignometricFunctions functions;
+	int radians;
+	int degree;
+
+	public TestClassRadians(int radians, int degree) {
+		this.radians = radians;
+		this.degree = degree;
+	}
+
+	@Parameterized.Parameters
+	public static Collection values() {
+
+		Object[][] data = { { 90, 90 }, { 180, 180 }, { 60, 60 }, { 0, 0 }, { 2, 2 }, { 120, 120 }, { 360, 360 },
+				{ -180, -180 }, { -120, -120 }, { -360, -360 }, { -270, -270 }, { -1, -1 }, { -60, -60 } };
+		return Arrays.asList(data);
+	}
+
+	@Before
+	public void initialize() {
+		functions = new TrignometricFunctions();
+	}
+
+	@Test
+	public void testSine() {
+		assertEquals(Math.sin(radians), functions.sin(radians), 0.001);
+	}
+
+	@Test
+	public void testSinedegree() {
+		assertEquals(Math.sin(Math.toRadians(degree)), functions.sinDegree(degree), 0.001);
+	}
+
+	@Test
+	public void testCosine() {
+		assertEquals(Math.cos(radians), functions.cos(radians), 0.001);
+	}
+
+	@Test
+	public void testTan() {
+		assertEquals(Math.tan(radians), functions.tan(radians), 0.001);
+	}
+
+	@Test
+	public void testPi() {
+		assertEquals(Math.PI, functions.getPI(), 0.001);
+	}
+
+	@Test
+	public void testGetRadians() {
+		assertEquals(Math.toRadians(degree), functions.toRadian(degree), 0.001);
+	}
+
+	@Test
+	public void testGetDegree() {
+		assertEquals(Math.toDegrees(radians), functions.toDegree(radians), 0.001);
+	}
+}

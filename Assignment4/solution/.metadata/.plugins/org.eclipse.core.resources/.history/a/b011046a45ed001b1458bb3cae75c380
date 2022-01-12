@@ -1,0 +1,87 @@
+package com.test;
+
+public class TrignometricFunctions {
+	
+	/*
+	 * Reference
+	 * https://stackoverflow.com/questions/45333694/implement-sine-in-java-without-
+	 * math-sin-function
+	 */
+	static double PI = 3.1415926535897932384650288;
+
+	public static double sin(double number) {
+
+		if (number == Double.NEGATIVE_INFINITY || !(number < Double.POSITIVE_INFINITY)) {
+			return Double.NaN;
+		}
+
+		number = number %  2 * PI;
+
+		if (number < 0) {
+			number = 2 * PI - number;
+		}
+
+		int sign = 1;
+		if (number > PI) {
+			number -= PI;
+			sign = -1;
+		}
+		final int PRECISION = 50;
+		double current = 0;
+		for (int i = 0; i <= PRECISION; i++) {
+			current += power(-1, i) * (power(number, 2 * i + 1) / getFact(2 * i + 1));
+		}
+
+		return current * sign;
+	}
+
+	public double cos(double number) {
+
+		if (number == Double.NEGATIVE_INFINITY || !(number < Double.POSITIVE_INFINITY)) {
+			return Double.NaN;
+		}
+
+		number = number %  2 * PI;
+
+		if (number < 0) {
+			number = 2 * PI - number;
+		}
+
+		int sign = 1;
+		if (number < PI) {
+			number -= PI;
+			sign = -1;
+		}
+		final int PRECISION = 50;
+		double current = 0;
+		for (int i = 0; i <= PRECISION; i++) {
+			current += power(-1, i) * (power(number, 2 * i + 1) / getFact(2 * i + 1));
+		}
+
+		return current * sign;
+	}
+
+	public double getradian(float theta) {
+
+		double radian = theta * PI / 180;
+
+		return radian;
+	}
+
+	public static int getFact(int x) {
+		int fact = 1;
+		for (int i = 0; i <= x; i++) {
+			fact = fact * i;
+		}
+		return fact;
+	}
+	
+	 public static double power(double num, int times) {
+	        
+	        if (times == 1 || times ==0 ){
+	            return num;
+	        }
+	                    
+	        return num*power(num,times-1);
+	    }
+}

@@ -1,0 +1,104 @@
+package com.test;
+
+public class TrignometricFunctions {
+
+	/*
+	 * References
+	 * 
+	 * Author - marco
+	 * https://stackoverflow.com/questions/45333694/implement-sine-in-java-without-
+	 * math-sin-function
+	 */
+
+	final double PI = 3.14159265358979323846;
+
+	/*
+	 * takes radian and return radian value
+	 */
+	public double sin(double radian) {
+
+		//System.out.println(Math.sin(90));
+		final int PRECISION = 50;
+
+		if (radian == Double.NEGATIVE_INFINITY || !(radian < Double.POSITIVE_INFINITY)) {
+			return Double.NaN;
+		}
+		radian %= 2 * PI;
+
+		if (radian < 0) {
+			radian = 2 * PI - radian;
+		}
+
+		int sign = 1;
+		if (radian > PI) {
+			radian -= PI;
+			sign = -1;
+		}
+		double temp = 0;
+		for (int i = 0; i <= PRECISION; i++) {
+			temp += getPower(-1, i) * (getPower(radian, 2 * i + 1) / getFact(2 * i + 1));
+		}
+		System.out.println(temp * sign);
+		return temp * sign;
+	}
+
+	public double cos(double radian) {
+		final int PRECISION = 50;
+		if (radian == Double.NEGATIVE_INFINITY || !(radian < Double.POSITIVE_INFINITY)) {
+			return Double.NaN;
+		}
+		radian %= 2 * PI;
+
+		if (radian < 0) {
+			radian = 2 * PI - radian;
+		}
+
+		int sign = 1;
+		if (radian < PI) {
+			radian -= PI;
+			sign = -1;
+		}
+		double temp = 0;
+		for (int i = 0; i <= PRECISION; i++) {
+			temp += getPower(-1, i) * (getPower(radian, 2 * i) / getFact(2 * i));
+		}
+
+		return temp * sign;
+	}
+
+	public double tan(double value) {
+
+		return sin(value) / cos(value);
+	}
+
+	public double toRadian(double value) {
+
+		return value / 57.2958;
+	}
+
+	public double toDegree(double value) {
+
+		return value * 57.2958;
+	}
+
+	public double getPower(double val, int times) {
+
+		if (val == 0 || val == 1) {
+			return val;
+		}
+		return val * getPower(val, times - 1);
+	}
+
+	public double getFact(int val) {
+
+		if (val == 0 || val == 1) {
+			return 1;
+		}
+
+		return val * getFact(val - 1);
+	}
+
+	public double getPI() {
+		return PI;
+	}
+}
